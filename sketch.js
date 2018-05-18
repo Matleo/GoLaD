@@ -73,6 +73,9 @@ function keyPressed() {
     startSimulation();
   }
 }
+function doubleClicked(){
+	startSimulation();
+}
 
 function killOrRevive(){
   var xDrinne = mouseX>=myWidth/3 && mouseX<myWidth/3 + 5*myWidth/15;
