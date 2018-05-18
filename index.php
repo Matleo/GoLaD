@@ -10,6 +10,6 @@
     <script src="sketch.js"></script>
   </head>
   <body>
-    <div id ="canvas_container"></div>
+    <div id ="canvas_container"></div> 
   </body>
 </html>
