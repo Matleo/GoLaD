@@ -1,28 +1,29 @@
-var numberCells = 6;
-var myWidth = 1024;
-var myHeigth = 640;
-var bg;
+
+var myWidth = 900;
+var myHeigth = 450;
+var resolution = 40;
 
 
 class Cell {
-	constructor(i,j,canvas_width,canvas_height){
+	constructor(i,j,resolution){
 		this.i = i;
 		this.j = j;
 
-		this.alive = false;
-		this.changed = 0;
+		
+		if(Math.random() <=0.5){
+			this.alive = false;
+		}else{
+			this.alive = true;
+		}
+		this.changed = false;
 		this.neighboursAlive = 0;
 
 		//params for drawin:
-		this.canvas_width = canvas_width;
-		this.canvas_height = canvas_height;
 
-		this.width = this.canvas_width/15;
-		this.height = this.canvas_height/15;
-		this.margin_left = this.canvas_width / 3.5;
-		this.margin_top = this.canvas_height / 5;
-		this.position_x = this.margin_left + this.i * this.width;
-		this.position_y = this.margin_top + this.j * this.height;
+
+		this.resolution = resolution;
+		this.position_x = this.i * this.resolution;
+		this.position_y = this.j * this.resolution;
 	}
 
 	show(){
@@ -40,15 +41,15 @@ class Cell {
 			stroke("black");
 		}
 
-		rect(this.position_x, this.position_y, this.width, this.height, 4);
+		rect(this.position_x, this.position_y, this.resolution, this.resolution, 4);
 		fill(0);
-		textSize(14);
-		text("("+i+","+j+")", this.position_x + myWidth/40, this.position_y + myWidth/30);
+		textSize(9);
+		text("("+i+","+j+")", this.position_x + this.resolution/4, this.position_y + this.resolution/2);
 	}
 
 	maybeClicked(x,y){
-		var xDrinne = x>=this.position_x && x<this.position_x + this.width;
-		var yDrinne = y>=this.position_y && y<this.position_y + this.height;
+		var xDrinne = x>=this.position_x && x<this.position_x + this.resolution;
+		var yDrinne = y>=this.position_y && y<this.position_y + this.resolution;
 
 		if(xDrinne && yDrinne){
 			this.alive = !this.alive; //flip status
@@ -57,65 +58,31 @@ class Cell {
 }
 
 //initialize cells:
-var cells = new Array(numberCells);
-for(p = 0; p<numberCells;p++){
-	cells[p] = new Array(numberCells);
-	for(q = 0; q<numberCells;q++){
-		cells[p][q] = new Cell(p,q,myWidth,myHeigth);
+var rows = Math.floor(myWidth / resolution);
+var cols = Math.floor(myHeigth / resolution);
+var cells = new Array(rows);
+for(p = 0; p<rows;p++){
+	cells[p] = new Array(cols);
+	for(q = 0; q<cols;q++){
+		cells[p][q] = new Cell(p,q,resolution);
 	}
 }
 
 
 function preload()
 {
-  bg = loadImage("pictures/DNA.jpg");
+
 }
 
 function setup() {
   var canvas = createCanvas(myWidth, myHeigth);
   canvas.parent('canvas_container');
-  rect(0,0,myWidth-1,myHeigth-1);
-  //background("#037f42");
-  background(bg);
 
-
-  //drawPetals(140,70,25);
-
-  //Heading
-  fill(255);
-  textSize(36);
-  text("Game of Life and Death 2018",myWidth/4,myHeigth/12);
-
-  //Calculation Buttons
-  fill(255);
-  rect(myWidth*0.33,myHeigth*0.63,myWidth/3.5,myHeigth/12,20);
-  fill(0);
-  textSize(20);
-  text("Lebenszyklus berechnen",myWidth*0.36,myHeigth*0.68);
-
-  //Rules
-  textSize(14);
-  var spielregeln ="Spielregeln: Sie sehen eine Ansammlung von 6x6 Zellen vor sich. Jede dieser Zelle kann entweder lebendig(gelb) oder tot(braun) sein. ";
-  var spielregeln2 = "Durch anklicken einer Zelle können sie den aktuellen Status ändern. "
-  var spielregeln3 = "Mit dem betätigen des Enter-Buttons, wird ein Zyklus der folgenden Regeln durchlaufen: ";
-  var spielregeln4 = "1. Jede lebende Zelle, welche nicht 2 oder 3 lebende Nachbarzellen hat, stirbt";
-  var spielregeln5 = "2. Jede tote Zelle, die genau 3 lebende Nachbarzellen hat, wird wiederbelebt";
-  var spielregeln6 = "(Eine Zelle am Rand des Spielfeldes hat dabei ihre Nachbarzellen auch auf der gegenüberliegenden Seite)"
-	fill(255);
-	rect(myWidth/15-20,23*myHeigth/30 -20,	13*myWidth/15,6*myHeigth/30+10);
-	fill(0);
-	text(spielregeln,myWidth/15, 23*myHeigth/30);
-  text(spielregeln2,myWidth/15, 24*myHeigth/30);
-  text(spielregeln3,myWidth/15, 25*myHeigth/30);
-  text(spielregeln4,myWidth/14, 26*myHeigth/30);
-  text(spielregeln5,myWidth/14, 27*myHeigth/30);
-  text(spielregeln6,myWidth/14, 28*myHeigth/30);
-  text("Autor: Matthias Leopold",myWidth*0.82, 59*myHeigth/60);
 }
 
 function draw() {
-  for(i = 0; i<numberCells;i++){
-    for(j = 0; j<numberCells;j++){
+  for(i = 0; i<rows;i++){
+    for(j = 0; j<cols;j++){
       cells[i][j].show();
 	}
   }
@@ -126,8 +93,8 @@ function draw() {
 
 function drawPetals(ellipseWide,ellipseShort,shift){
   //Blätter malen
-  for(i = 0; i<numberCells;i++){
-    for(j=0;j<numberCells;j++){
+  for(i = 0; i<rows;i++){
+    for(j=0;j<col;j++){
 
       //links obere Ecke
       if(i==0 && j==0){
@@ -184,17 +151,11 @@ function drawPetals(ellipseWide,ellipseShort,shift){
 }
 
 function mouseClicked() {
-  for(i = 0; i<numberCells; i++){
-	  for(j=0; j<numberCells; j++){
+  for(i = 0; i<rows; i++){
+	  for(j=0; j<cols; j++){
+			//TODO: calculate i and j and just send click to that. And implement mouseDragged
 		  cells[i][j].maybeClicked(mouseX,mouseY);
 	  }
-  }
-
-  //Button
-  var xDrinne = mouseX>=myWidth*0.33 && mouseX < myWidth*0.33+ myWidth/3.5;
-  var yDrinne = mouseY>=myHeigth*0.63 && mouseY < myHeigth*0.63 + myHeigth/12;
-  if(xDrinne && yDrinne){
-    startSimulation();
   }
 }
 
@@ -207,8 +168,8 @@ function keyPressed() {
 
 function startSimulation(){
   var cellsToChange = []
-  for(k = 0; k<numberCells; k++){
-    for(l=0; l<numberCells; l++){
+  for(k = 0; k<rows; k++){
+    for(l=0; l<cols; l++){
       cells[k][l].changed = 0; //in the beginning of each cycle, reset changed attribute
 	  var neighboursAlive = countNeighbours(k,l);
 	  //alert("("+k+","+l+") hat " +neighboursAlive + " Nachbarn");
@@ -239,8 +200,8 @@ function countNeighbours(my_i,my_j){
   for(i = my_i-1; i<=my_i+1; i++){
     var clean_i;
     if(i<0){
-      clean_i = numberCells-1;
-    }else if(i>numberCells-1){
+      clean_i = rows-1;
+    }else if(i>rows-1){
       clean_i = 0;
     }else{
       clean_i = i;
@@ -249,8 +210,8 @@ function countNeighbours(my_i,my_j){
     for(j = my_j-1; j<=my_j+1;j++){
       var clean_j;
       if(j<0){
-        clean_j = numberCells-1;
-      }else if(j>numberCells-1){
+        clean_j = cols-1;
+      }else if(j>cols-1){
         clean_j = 0;
       }else{
         clean_j = j;

@@ -1,1 +1,26 @@
-body {padding: 0; margin: 0;}
+body {
+  padding: 0;
+  margin: 0;
+  background-image: url("pictures/DNA3.jpg");
+  color:white;
+  text-align: center;
+  background-position: center center;
+}
+
+ul {
+	min-width: 696px;
+	list-style: none;
+}
+
+#regeln{
+  background-color: black;
+  margin-left : 15em;
+  margin-right: 15em;
+}
+
+#canvas_wrapper{
+  padding : 2em 2em 2em 2em;
+  margin-left: 10em;
+  margin-right: 11em;
+  background-color: white;
+}
