@@ -2,6 +2,8 @@
 var myWidth = 900;
 var myHeigth = 450;
 var resolution = 40;
+var cell;
+var cell_bw;
 
 
 class Cell {
@@ -9,7 +11,7 @@ class Cell {
 		this.i = i;
 		this.j = j;
 
-		
+
 		if(Math.random() <=0.5){
 			this.alive = false;
 		}else{
@@ -27,12 +29,9 @@ class Cell {
 	}
 
 	show(){
-		if(this.alive == true){
-			fill("#ffd700");//gelb;
-		}else{
-			fill("#cd853f");//braun
-		}
 
+		//TODO: not working
+		strokeWeight(4);
 		if(this.changed==-1){
 			stroke("red");
 		}else if(this.changed==1){
@@ -41,13 +40,15 @@ class Cell {
 			stroke("black");
 		}
 
-		rect(this.position_x, this.position_y, this.resolution, this.resolution, 4);
-		fill(0);
-		textSize(9);
-		text("("+i+","+j+")", this.position_x + this.resolution/4, this.position_y + this.resolution/2);
+
+		if(this.alive == true){
+		image(cell,this.position_x, this.position_y, this.resolution, this.resolution);
+		}else{
+		image(cell_bw,this.position_x, this.position_y, this.resolution, this.resolution);
+		}
 	}
 
-	maybeClicked(x,y){
+	maybeActivate(x,y){
 		var xDrinne = x>=this.position_x && x<this.position_x + this.resolution;
 		var yDrinne = y>=this.position_y && y<this.position_y + this.resolution;
 
@@ -71,7 +72,8 @@ for(p = 0; p<rows;p++){
 
 function preload()
 {
-
+	cell = loadImage("pictures/cell2.jpg");
+	cell_bw = loadImage("pictures/cell_bw.jpg");
 }
 
 function setup() {
@@ -81,83 +83,25 @@ function setup() {
 }
 
 function draw() {
-  for(i = 0; i<rows;i++){
+
+	strokeWeight(4);
+	stroke("red");
+	rect(0,0,width-10,height-5);
+	translate(6,3);
+	for(i = 0; i<rows;i++){
     for(j = 0; j<cols;j++){
       cells[i][j].show();
-	}
-  }
-
-}
-
-
-
-function drawPetals(ellipseWide,ellipseShort,shift){
-  //Blätter malen
-  for(i = 0; i<rows;i++){
-    for(j=0;j<col;j++){
-
-      //links obere Ecke
-      if(i==0 && j==0){
-        fill("red");
-        translate(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 + (j+1)*myHeigth/15 + shift);
-        rotate(-PI / 3.0);
-        ellipse(40,-70,ellipseShort,ellipseWide);
-        rotate(PI / 3.0);
-        translate(-(myWidth/3.5+ i*myWidth/15+shift*1.5), -(myHeigth/5 + (j+1)*myHeigth/15 + shift))
-      }
-      //obere Seite
-      if(j==0){
-        ellipse(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 - shift,ellipseShort,ellipseWide);
-      }
-      //rechts obere Ecke
-      if(i==numberCells-1 && j==0){
-        translate(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 + (j+1)*myHeigth/15 + shift);
-        rotate(PI / 3.0);
-        ellipse(-40,-60,ellipseShort,ellipseWide);
-        rotate(-PI / 3.0);
-        translate(-(myWidth/3.5+ i*myWidth/15+shift*1.5), -(myHeigth/5 + (j+1)*myHeigth/15 + shift))
-      }
-      //rechte Seite
-      if(i==numberCells-1){
-        ellipse(myWidth/3.5+ (i+1)*myWidth/15+shift, myHeigth/5 + j*myHeigth/15+shift,ellipseWide,ellipseShort);
-      }
-      //rechts untere Ecke
-      if(i==numberCells-1 && j==numberCells-1){
-        translate(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 + (j+1)*myHeigth/15 + shift);
-        rotate(-PI / 3.0);
-        ellipse(35,20,ellipseShort,ellipseWide);
-        rotate(PI / 3.0);
-        translate(-(myWidth/3.5+ i*myWidth/15+shift*1.5), -(myHeigth/5 + (j+1)*myHeigth/15 + shift))
-      }
-      //untere Seite
-      if(j==numberCells-1){
-        ellipse(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 + (j+1)*myHeigth/15 + shift,ellipseShort,ellipseWide);
-      }
-      //links untere Ecke
-      if(i==0 && j==numberCells-1){
-        translate(myWidth/3.5+ i*myWidth/15+shift*1.5, myHeigth/5 + (j+1)*myHeigth/15 + shift);
-        rotate(PI / 3.0);
-        ellipse(-30,30,ellipseShort,ellipseWide);
-        rotate(-PI / 3.0);
-        translate(-(myWidth/3.5+ i*myWidth/15+shift*1.5), -(myHeigth/5 + (j+1)*myHeigth/15 + shift))
-      }
-      //linke Seite
-      if(i==0){
-        ellipse(myWidth/3.5-shift, myHeigth/5 + j*myHeigth/15+shift,ellipseWide,ellipseShort);
-      }
-
-    }
+		}
   }
 }
+
+
+
 
 function mouseClicked() {
-  for(i = 0; i<rows; i++){
-	  for(j=0; j<cols; j++){
-			//TODO: calculate i and j and just send click to that. And implement mouseDragged
-		  cells[i][j].maybeClicked(mouseX,mouseY);
-	  }
-  }
+  activate();
 }
+
 
 function keyPressed() {
   if(keyCode == ENTER){
@@ -195,6 +139,32 @@ function startSimulation(){
   }
 }
 
+function activate(){
+	for(i = 0; i<rows; i++){
+	  for(j=0; j<cols; j++){
+		  cells[i][j].maybeActivate(mouseX,mouseY);
+	  }
+  }
+}
+
+function setAlive(boolean){
+	for(i=0;i<rows;i++){
+		for(j=0;j<cols;j++){
+			if(boolean != null){
+				cells[i][j].alive = boolean;
+			}else{
+				var alive_percentage = $("#alive_percentage").val() / 100;
+
+					if(Math.random() <=alive_percentage){
+							cells[i][j].alive = true;
+					}else{
+							cells[i][j].alive = false;
+					}
+			}
+		}
+	}
+}
+
 function countNeighbours(my_i,my_j){
   var count = 0;
   for(i = my_i-1; i<=my_i+1; i++){
@@ -226,4 +196,14 @@ function countNeighbours(my_i,my_j){
     }
   }
   return(count);
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+		var newTime = new Date().getTime();
+    if ((newTime - start) > milliseconds){
+      break;
+    }
+  }
 }
