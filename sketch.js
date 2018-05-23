@@ -72,8 +72,8 @@ for(p = 0; p<rows;p++){
 
 function preload()
 {
-	cell = loadImage("pictures/cell2.jpg");
-	cell_bw = loadImage("pictures/cell_bw.jpg");
+	cell = loadImage("pictures/pilz_lebendig.jpg");
+	cell_bw = loadImage("pictures/pilz_tot.jpg");
 }
 
 function setup() {

@@ -1,10 +1,11 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url("pictures/DNA3.jpg");
+  background-image: url("pictures/ast.jpg");
   color:white !important;
   text-align: center !important;
-  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ul {
@@ -12,16 +13,24 @@ ul {
 	list-style: none;
 }
 
-#regeln{
-  background-color: black;
-  margin-left : 13.5em;
-  margin-right: 15em;
-  padding: 1em 2em 1em 2em;
+h1 {
+  background-color: grey;
 }
 
-#canvas_wrapper{
-  padding : 2em 2em 4em 2em;
-  margin-left: 10em;
-  margin-right: 11em;
+#canvas_container {
+  margin-top: 10em;
+}
+
+#regeln{
+  background-color: black;
+}
+
+#trenner{
+  border-color:white;
   background-color: white;
+  width:70%;
+}
+
+#start{
+  color:black;
 }
