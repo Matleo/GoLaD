@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col offset-1">
+        <div class="col col-md-offset-1">
           <div id ="canvas_container"></div>
         </div>
       </div>

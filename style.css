@@ -4,7 +4,6 @@ body {
   background-image: url("pictures/ast.jpg");
   color:white !important;
   text-align: center !important;
-  background-repeat: no-repeat;
   background-size: cover;
 }
 
@@ -33,4 +32,10 @@ h1 {
 
 #start{
   color:black;
+}
+
+@media screen and (max-width: 1000px) {
+  #canvas_container{
+    margin-left: -6em;
+  }
 }
