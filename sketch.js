@@ -5,12 +5,12 @@ var myHeigth = 640;
 //initialize state arrays with 0s:
 var alive = new Array(numberCells);
 var changed = new Array(numberCells);
-for(n=0; n<numberCells;n++){
-  alive[n] = new Array(numberCells);
-  changed[n] = new Array(numberCells);
-  for(o=0; o<numberCells;o++){
-    alive[n][o] = 0;
-    changed[n][o] = 0;
+for(i=0; i<numberCells;i++){
+  alive[i] = new Array(numberCells);
+  changed[i] = new Array(numberCells);
+  for(j=0; j<numberCells;j++){
+    alive[i][j] = 0;
+    changed[i][j] = 0;
   }
 }
 
@@ -35,7 +35,7 @@ function setup() {
   text("Lebenszyklus berechnen",myWidth*0.36,myHeigth*0.68);
 
   textSize(14);
-  var spielregeln ="Spielregeln: Sie sehen eine Ansammlung von 5x5 Zellen vor sich. Jede dieser Zelle kann entweder lebendig(blau) oder tot(weiß) sein. ";
+  var spielregeln ="Spielregeln: Sie sehen eine Ansammlung von 6x6 Zellen vor sich. Jede dieser Zelle kann entweder lebendig(gelb) oder tot(braun) sein. ";
   var spielregeln2 = "Durch anklicken einer Zelle können sie den aktuellen Status ändern. "
   var spielregeln3 = "Mit dem betätigen des Enter-Buttons, wird ein Zyklus der folgenden Regeln durchlaufen: ";
   var spielregeln4 = "1. Jede lebende Zelle, welche nicht 2 oder 3 lebende Nachbarzellen hat, stirbt";
@@ -172,12 +172,12 @@ function killOrRevive(){
 }
 
 function startSimulation(){
-  var new_alive = new Array(numberCells);
-  for(k = 0; k<numberCells; k++){
-    new_alive[k] = new Array(numberCells);
-    for(l=0; l<numberCells; l++){
-      changed[k][l] = 0; //dirty..
-      new_alive[k][l]= alive[k][l];
+  var new_alive = new Array(numberCells);//copy alive array
+  for(i = 0; i<numberCells; i++){
+    new_alive[i] = new Array(numberCells);
+    for(j=0; j<numberCells; j++){
+      changed[i][j] = 0; //reset changed attribute to 0 for all cells, before actually changing stuff
+      new_alive[i][j]= alive[i][j];
     }
   }
   for(k = 0; k<numberCells; k++){
