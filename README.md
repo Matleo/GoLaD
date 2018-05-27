@@ -11,3 +11,10 @@ Eine kurzes Beispiel, wie atom-live-server verwendet werden kann, ist [hier](htt
 #### Heroku
 Alternativ habe ich die Applikation über [Heroku]() gehostet, sie ist unter folgender Adresse erreichbar:
 * [https://golad2018.herokuapp.com/](https://golad2018.herokuapp.com/)
+
+## Ordner Struktur
+Auf Wurzel Ebene befinden sich die *index.html* und die *index.php*, beide besitzen identischen Inhalt. Die Datei *index.php* dient ausschließlich dem Zweck, dass Heroku das Projekt als Web Applikation erkennt und deployed.
+
+Im Ordner *code* befindet sich meine "Hauptklasse": *sketch.js*, die cell Klasse *cell.js* und das Stylesheet *style.css*.
+
+Der Ordner *pictures* beinhaltet alle verwendeten Bilder. Dabei wurden nur Bilder verwendet, welche als "frei zu Nutzen oder weiterzugeben" markiert sind. 
