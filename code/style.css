@@ -2,7 +2,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-image: url("pictures/ast.jpg");
+  background-image: url("../pictures/ast.jpg");
   color:white !important;
   text-align: center !important;
   background-size: cover;

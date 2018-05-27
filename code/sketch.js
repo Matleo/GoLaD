@@ -20,8 +20,8 @@ for (p = 0; p < rows; p++) {
 
 //is called before setup, to make sure pictures are loaded already
 function preload() {
-  shroom_pic = loadImage("pictures/pilz_lebendig.jpg");
-  shroom_pic_bw = loadImage("pictures/pilz_tot.jpg");
+  shroom_pic = loadImage("../pictures/pilz_lebendig.jpg");
+  shroom_pic_bw = loadImage("../pictures/pilz_tot.jpg");
 }
 
 //this function is called once when setting up
