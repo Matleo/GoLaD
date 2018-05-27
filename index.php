@@ -3,16 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-
-
-    <script src="p5/p5.min.js"></script>
-    <script src="p5/addons/p5.dom.min.js"></script>
-    <script src="p5/addons/p5.sound.min.js"></script>
-    <script src="sketch.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">
@@ -56,7 +49,7 @@
               <ul>
                 <li>1. Jede lebende Zelle, welche nicht 2 oder 3 lebende Nachbarzellen hat, stirbt</li>
                 <li>2. Jede tote Zelle, die genau 3 lebende Nachbarzellen hat, wird wiederbelebt</li>
-                <li>Jede Zelle hat dabei genau 8 Nachbarzellen. Eine Zelle am Rand des Spielfeldes hat ihre Nachbarzellen auch auf der gegenüberliegenden Seite)</li>
+                <li>(Jede Zelle hat dabei genau 8 Nachbarzellen. Eine Zelle am Rand des Spielfeldes hat ihre Nachbarzellen auch auf der gegenüberliegenden Seite)</li>
               </ul>
               <p>Autor: Matthias Leopold</p>
             </div>
@@ -64,6 +57,9 @@
         </div>
       </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>">
+    <script src="cell.js"></script>
+    <script src="sketch.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

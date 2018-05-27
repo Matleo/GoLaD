@@ -1,3 +1,4 @@
+
 body {
   padding: 0;
   margin: 0;
@@ -8,7 +9,6 @@ body {
 }
 
 ul {
-	min-width: 696px;
 	list-style: none;
 }
 
@@ -17,7 +17,8 @@ h1 {
 }
 
 #canvas_container {
-  margin-top: 10em;
+  margin-top: 8em;
+  margin-bottom: 3em;
 }
 
 #regeln{
