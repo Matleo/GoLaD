@@ -18,3 +18,6 @@ Auf der Wurzel Ebene befinden sich die Dateien *index.html* und *index.php*, bei
 Im Ordner *code* befindet sich meine "Hauptklasse": *sketch.js*, die cell Klasse: *cell.js* und das Stylesheet: *style.css*.
 
 Der Ordner *pictures* beinhaltet alle verwendeten Bilder. Dabei wurden nur Bilder verwendet, welche als "frei zu Nutzen oder weiterzugeben" markiert sind. 
+
+## Anmerkung
+Durch den Einsatz des CSS Frameworks [Bootstrap](https://getbootstrap.com/), ist die Applikation zu einem gewissen Grad responsive und dementsprechend auch auf mobilen Geräten nutzbar.
