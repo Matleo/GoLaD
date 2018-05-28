@@ -54,8 +54,9 @@ function draw() {
 function mouseClicked() {
   var clicked_i = Math.floor(mouseX / resolution); //since a cells position_x is calculated as i * resolution -> i = position_x / resolution.
   var clicked_j = Math.floor(mouseY / resolution); //Same for j.
-
-  cells[clicked_i][clicked_j].switchStatus(mouseX, mouseY);
+  if(clicked_i < rows && clicked_i>=0 && clicked_j < cols && clicked_j>=0){
+    cells[clicked_i][clicked_j].switchStatus(mouseX, mouseY);
+  }
 }
 
 
@@ -113,7 +114,7 @@ function startSimulation() {
 function setAlive(status) {
   for (i = 0; i < rows; i++) {
     for (j = 0; j < cols; j++) {
-      if (boolean != null) { //if nut null, kill/revive all
+      if (status != null) { //if nut null, kill/revive all
         cells[i][j].alive = status;
       } else {
         var alive_percentage = $("#alive_percentage").val() / 100; //fetch input from html input
